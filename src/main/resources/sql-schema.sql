@@ -1,0 +1,12 @@
+DROP DATABASE animals;
+
+CREATE DATABASE animals;
+
+USE animals;
+
+CREATE TABLE mammals(
+id INT UNIQUE NOT NULL AUTO_INCREMENT,
+mammal_name VARCHAR(30) NOT NULL,
+colour VARCHAR(30) NOT NULL,
+origin VARCHAR(50) NOT NULL,
+PRIMARY KEY(id));
