@@ -58,7 +58,33 @@ public class Runner {
 					q.read();
 					break;
 				case "update":
-					q.update();
+					String update = "";
+					System.out.println("Enter the id of the record you wish to update: ");
+					int updateId = sc.nextInt();
+					sc.nextLine();// to catch the enter key
+					System.out.println(
+							"Enter the number of the field you would like to update: \n 1 - MammalName \n 2 - Colour \n 3 - Origin");
+					int uField = sc.nextInt();
+					sc.nextLine();// to catch the enter key
+					switch (uField) {
+					case 1:
+						update = "mammal_name";
+						break;
+					case 2:
+						update = "colour";
+						break;
+					case 3:
+						update = "origin";
+						break;
+					default:
+						System.out.println(
+								"Invalid number, please enter 1, 2 or 3 for the field you would like to update");
+
+					}
+
+					System.out.println("Please enter the new value: ");
+					String uValue = sc.nextLine();
+					q.update(update, uValue, updateId);
 					break;
 				case "delete":
 					System.out.println("Enter id of the mammal you would like to delete: ");
@@ -74,8 +100,11 @@ public class Runner {
 				String quit = sc.nextLine();
 				if (quit.toLowerCase().equals("y")) {
 					crud = getInput();
-				} else {
+				}
+				else if (quit.toLowerCase().equals("n")) {
 					crud = "exit";
+				} else {
+					System.out.println("Please enter 'y' or 'n'");
 				}
 			} while (!crud.equals("exit"));
 			System.out.println("BYEEE");

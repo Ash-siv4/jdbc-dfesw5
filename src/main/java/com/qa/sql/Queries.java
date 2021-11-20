@@ -47,7 +47,7 @@ public class Queries {
 				+ orig + "');";
 		try {
 			stmt.executeUpdate(createStmt);
-			System.out.println("Statement executed");
+			System.out.println("Create statement executed");
 		} catch (SQLException e) {
 			System.out.println("Bad query");
 			e.printStackTrace();
@@ -61,8 +61,12 @@ public class Queries {
 		try {
 			rs = stmt.executeQuery(readStmt);
 			while (rs.next()) {
-				System.out.println("ID:" + rs.getInt("id") + "| MammalName: " + rs.getString("mammal_name")
-						+ "| Colour: " + rs.getString("colour") + "| Origin: " + rs.getString("origin"));
+				// the "\n" creates a new line for the text which follows
+				// the "\t" tabs the text
+				System.out.println("ID:" + rs.getInt("id") 
+				+ "\n | MammalName: " + rs.getString("mammal_name")
+				+ "\n | Colour: " + rs.getString("colour") 
+				+ "\n | Origin: " + rs.getString("origin"));
 			}
 		} catch (SQLException e) {
 			System.out.println("Bad query");
@@ -71,8 +75,15 @@ public class Queries {
 	}
 
 	// UPDATE - UPDATE .... -> returns nothing, just say "OK"
-	public void update() {
-
+	public void update(String updateField, String updateValue, int uId) {
+		String updateStmt = "UPDATE mammals SET " + updateField + "='" + updateValue + "' WHERE id=" + uId + ";";
+		try {
+			stmt.executeUpdate(updateStmt);
+			System.out.println("Update statement executed");
+		} catch (SQLException e) {
+			System.out.println("Bad query");
+			e.printStackTrace();
+		}
 	}
 
 	// DELETE - DELETE .... -> returns nothing, just say "OK"
@@ -80,7 +91,7 @@ public class Queries {
 		String delStmt = "DELETE FROM mammals WHERE id=" + id + ";";
 		try {
 			stmt.executeUpdate(delStmt);
-			System.out.println("Statement executed");
+			System.out.println("Delete statement executed");
 		} catch (SQLException e) {
 			System.out.println("Bad query");
 			e.printStackTrace();
